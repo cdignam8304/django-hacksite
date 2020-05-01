@@ -3,7 +3,7 @@
     <link href="{% static 'tinymce/css/prism.css' %}" rel="stylesheet">
     
     <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="{% static 'main/css/materialize.css' %}" rel="stylesheet">
 
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> 
@@ -22,8 +22,11 @@
         </div>
     </nav>
     
-    {% block content %}
-    {% endblock %}
+    <div class="container">
+        <br>
+        {% block content %}
+        {% endblock %}
+    </div>
 
 </body>
 
