@@ -7,10 +7,10 @@
         {% csrf_token %} <!-- provides defence against Cross Site Request Forgery. Use for all forms -->
         {{form.as_p}} <!-- We create the actual form in django in views.py -->
         
-        <button class="btn" style="background-color: yellow; color: blue;" type="submit">register</button>
+        <button class="btn" style="background-color: yellow; color: blue;" type="submit">login</button>
         
     </form>
 
-    If you already have an account, <a href="/login"><strong>login</strong></a> instead.
+    If you don't already have an account, <a href="/register"><strong>register</strong></a> instead.
 
 {% endblock %}
