@@ -16,12 +16,15 @@ Including another URLconf
 
 from django.urls import path
 from . import views
+from django.contrib import admin
 
 app_name = "main"
 
 urlpatterns = [
     path("", views.homepage, name="homepage"),
+    path("admin/", admin.site.urls), # added admin here due to order urls are checked
     path("register/", views.register, name="register"),
-    path("logout/", views.logout_request, name="logout"),
-    path("login/", views.login_request, name="login"),
+    path("logout/", views.logout_request, name="logout"), # we use logout_request as their is a django method called logout that we already imported!
+    path("login/", views.login_request, name="login"), # use login_request for same reason as above
+    path("<single_slug>/", views.single_slug, name="single_slug"), # get the single_slug from url (using '<>' syntax) and pass it as a variable to the views.single_slug function
 ]

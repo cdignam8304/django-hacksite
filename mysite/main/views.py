@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Hack
+from .models import Hack, HackCategory, HackSeries
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
@@ -8,10 +8,44 @@ from .forms import NewUserForm
 
 # Create your views here.
 
+def single_slug(request, single_slug):
+    """"
+        Determine whether single_slug relates to a Category or a Tutorial
+        Params:
+            - single_slug: e.g. in  "localhost:8000/admin/", admin is the single_slug
+    """
+    categories = [c.category_slug for c in HackCategory.objects.all()]
+    if single_slug in categories:
+        
+        # Get the series that relate to the category that was selected:
+        matching_series = HackSeries.objects.filter(hack_category__category_slug=single_slug)
+        
+        # Find the tutorials that are part 1s from the matching series and
+        # store each matching series object and the first tutorial of each series in a dict:
+        series_urls = {}
+        for m in matching_series.all():
+            part_one = Hack.objects.filter(hack_series__hack_series=m.hack_series).earliest("hack_published")
+            series_urls[m] = part_one.hack_slug
+        
+        return render(request=request,
+                      template_name="main/category.html",
+                      context={"part_ones": series_urls})
+    
+    hacks = [h.hack_slug for h in Hack.objects.all()]
+    if single_slug in hacks:
+        return HttpResponse(f"{single_slug} is a Hack!!!")
+    
+    return HttpResponse(f"{single_slug} is not a HackCategory or a Hack!!!")
+
+
 def homepage(request):
+    # return render(request=request,
+    #               template_name="main/home.html",
+    #               context={"hacks":Hack.objects.all})
     return render(request=request,
-                  template_name="main/home.html",
-                  context={"hacks":Hack.objects.all})
+                  template_name="main/categories.html",
+                  context={"categories":HackCategory.objects.all})
+
 
 def register(request): # NB: The default request is a GET request
     
