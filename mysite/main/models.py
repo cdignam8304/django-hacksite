@@ -1,5 +1,7 @@
 from django.db import models
 from datetime import datetime
+import os
+from django.conf import settings
 
 # Create your models here.
     
@@ -9,6 +11,8 @@ class HackCategory(models.Model):
     hack_category = models.CharField(max_length=200)
     category_summary = models.CharField(max_length=200)
     category_slug = models.CharField(max_length=200)
+    category_photo = models.ImageField(upload_to="media",
+                                       default = os.path.join(settings.MEDIA_URL,"lifehacks.jpg"))
     
     class Meta():
         verbose_name_plural = "Categories"

@@ -1,19 +1,27 @@
 {% extends 'main/header.html' %}
 
+
 {% block content %}
 
+{% load static %} <!-- This method of serving images is for dev only! -->
+
+    <!-- Card with an image -->
     <div class="row">
         {% for cat in categories %}
-            <div class="col s12 m6 l4">
-                <a href="{{cat.category_slug}}", style="color:#000">
-                    <div class="card hoverable">
-                        <div class="card-content">
-                            <div class="card-title">{{cat.hack_category}}</div>
-                            <p>{{cat.category_summary}}</p>
-                        </div>
+            <div class="col s12 m6">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="{{cat.category_photo}}" alt="Category image">
+                        <span class="card-title">{{cat.hack_category}}</span>
+                        <a href="{{cat.category_slug}}" class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
                     </div>
-                </a>
+                    <div class="card-content">
+                        <p>{{cat.category_summary}}</p>
+                    </div>
+                </div>
             </div>
         {% endfor %}
     </div>
+    
 {% endblock %}
+

@@ -149,3 +149,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+# Following section is per these instructions for displaying object-specific images:
+# https://matthiasomisore.com/web-programming/display-image-in-a-django-template-using-imagefield/
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = "/media/"
+

@@ -16,7 +16,10 @@ Including another URLconf
 
 from django.urls import path
 from . import views
+from django.conf import settings
 from django.contrib import admin
+from django.contrib.staticfiles.urls import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 app_name = "main"
 
@@ -28,3 +31,6 @@ urlpatterns = [
     path("login/", views.login_request, name="login"), # use login_request for same reason as above
     path("<single_slug>/", views.single_slug, name="single_slug"), # get the single_slug from url (using '<>' syntax) and pass it as a variable to the views.single_slug function
 ]
+
+urlpatterns += staticfiles_urlpatterns()
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
