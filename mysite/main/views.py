@@ -29,11 +29,20 @@ def single_slug(request, single_slug):
         
         return render(request=request,
                       template_name="main/category.html",
-                      context={"part_ones": series_urls})
+                      context={"part_ones":series_urls})
     
     hacks = [h.hack_slug for h in Hack.objects.all()]
     if single_slug in hacks:
-        return HttpResponse(f"{single_slug} is a Hack!!!")
+        # return HttpResponse(f"{single_slug} is a Hack!!!")
+        this_hack = Hack.objects.get(hack_slug=single_slug)
+        hacks_from_series = Hack.objects.filter(hack_series__hack_series=this_hack.hack_series)
+        this_hack_idx = list(hacks_from_series).index(this_hack)
+        return render(request=request,
+                      template_name="main/hack.html",
+                      context={"hack":this_hack,
+                               "sidebar":hacks_from_series,
+                               "this_hack_idx":this_hack_idx})
+        
     
     return HttpResponse(f"{single_slug} is not a HackCategory or a Hack!!!")
 
