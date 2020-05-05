@@ -4,17 +4,21 @@
 
     <div class="row">
         {% for hack, partone in part_ones.items %}
-
             <div class="col s12 m6 l4">
-                <a href="/{{partone}}", style="color:#000"> <!-- fwd slash at start not in tutorial instructions! -->
+                <!-- <a href="/{{partone}}", style="color:#000"> --> <!-- fwd slash at start not in tutorial instructions! -->
                     <div class="card hoverable">
+                        <div class="card-image">
+                            <img src="{{ MEDIA_URL }}/{{hack.series_photo}}" alt="Series image" style="height:20%;">
+                            <span class="card-title">{{hack.hack_series}}</span>
+                            <a href="/{{partone}}" class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+                        </div>
                         <div class="card-content">
-                            <div class="card-title">{{hack.hack_series}}</div>
+                            <!-- <div class="card-title">{{hack.hack_series}}</div> -->
                             <!--<p style="font-size:70%">Published {{hack.hack_published}}</p>-->
                             <p>{{hack.series_summary}}</p>
                         </div>
                     </div>
-                </a>
+                <!-- </a> -->
             </div>
         {% endfor %}
     </div>

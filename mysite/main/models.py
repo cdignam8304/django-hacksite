@@ -29,6 +29,8 @@ class HackSeries(models.Model):
                                       verbose_name="Category",
                                       on_delete=models.SET_DEFAULT)
     series_summary = models.CharField(max_length=200)
+    series_photo = models.ImageField(upload_to="media",
+                                       default = os.path.join(settings.MEDIA_URL,"lifehacks.jpg"))
     
     class Meta():
         verbose_name_plural = "Series"
