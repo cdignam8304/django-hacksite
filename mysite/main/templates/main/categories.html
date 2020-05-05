@@ -9,9 +9,9 @@
     <div class="row">
         {% for cat in categories %}
             <div class="col s12 m6">
-                <div class="card">
+                <div class="card hoverable">
                     <div class="card-image">
-                        <img src="{{cat.category_photo}}" alt="Category image">
+                        <img src="{{cat.category_photo}}" alt="Category image" style="height:20%;">
                         <span class="card-title">{{cat.hack_category}}</span>
                         <a href="{{cat.category_slug}}" class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
                     </div>
