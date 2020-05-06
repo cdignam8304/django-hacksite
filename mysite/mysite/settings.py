@@ -57,6 +57,14 @@ TINYMCE_DEFAULT_CONFIG = {
     }
 
 
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
+    },
+}
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -66,8 +74,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'haystack',
     'main.apps.MainConfig',
-    'tinymce',
+    'tinymce'
 ]
 
 MIDDLEWARE = [
