@@ -1,8 +1,17 @@
 <nav>
     <div class="nav-wrapper">
-        <!-- <a href="#" class="brand-logo">Life Hacks</a> -->
         <a href="#" class="brand-logo"><i class="material-icons" style="padding-left: 20px;">directions</i>Life Hacks</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
+        
+        <ul id="nav-mobile" class="right hide-on-med-and-down">    
+            <li>
+                <form>
+                    <div class="input-field">
+                        <input id="search" type="search" required>
+                        <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                        <i class="material-icons">close</i>
+                    </div>
+                </form>
+            </li>      
             <li><a href="/"><i class="material-icons" style="padding-left: 0px;">home</i></a></li>
             {% if user.is_authenticated %}
                 <li><a href="/account" title="{{user.username}}"><i class="material-icons" style="padding-left: 0px;">account_circle</i></a></li>
