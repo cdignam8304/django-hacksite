@@ -1,0 +1,2 @@
+{{ object.hack_series }}
+{{ object.series_summary }}

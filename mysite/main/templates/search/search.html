@@ -22,6 +22,12 @@
                 <p>
                     <a href="{{ result.object.get_absolute_url }}">{{ result.object.hack_title }}</a>
                 </p>
+                <p>
+                    <a href="{{ result.object.get_absolute_url }}">{{ result.object.hack_series }}</a>
+                </p>
+                <p>
+                    <a href="{{ result.object.get_absolute_url }}">{{ result.object.hack_category }}</a>
+                </p>
             {% empty %}
                 <p>No results found.</p>
             {% endfor %}
