@@ -2,48 +2,49 @@
 
 {% block content %}
     
-    
-    <h2>Search</h2>
 
-    <!--
-    <form method="get" action=".">
-        <table>
-            {{ form.as_table }}
-            <tr>
-                <td>&nbsp;</td>
-                <td>
-                    <input type="submit" value="Search">
-                </td>
-            </tr>
-        </table>
-    -->
-        {% if query %}
-            <h3>Results</h3>
+    {% if query %}
+        <h3 style="color: silver;">Search Results</h3>
 
-            {% for result in page.object_list %}
-                <p>
-                    <a href="{{ result.object.get_absolute_url }}">{{ result.object.hack_title }}</a>
-                </p>
-                <p>
-                    <a href="{{ result.object.get_absolute_url }}">{{ result.object.hack_series }}</a>
-                </p>
-                <p>
-                    <a href="{{ result.object.get_absolute_url }}">{{ result.object.hack_category }}</a>
-                </p>
-            {% empty %}
-                <p>No results found.</p>
-            {% endfor %}
+        {% for result in page.object_list %}
+            <p>
+                <a href="{{ result.object.get_absolute_url }}">{{ result.object.hack_title }}</a>
+            </p>
+            <p>
+                <a href="{{ result.object.get_absolute_url }}">{{ result.object.hack_series }}</a>
+            </p>
+            <p>
+                <a href="{{ result.object.get_absolute_url }}">{{ result.object.hack_category }}</a>
+            </p>
+        {% empty %}
+            <div>
+                Sorry, there are no results for <span style="font-weight: bold; font-size: 18px; color: gray;">{{query}}</span>
+            </div>
+            
+            <div>
+                <h6>Suggestions:</h6>
+                    <ul>
+                        <li>&#8226  Make sure that all words are spelled correctly.</li>
+                        <li>&#8226  Try different keywords.</li>
+                        <li>&#8226  Try more general keywords.</li>
+                    </ul>
+            </div>
+            
+        {% endfor %}
 
-            {% if page.has_previous or page.has_next %}
-                <div>
-                    {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
-                    |
-                    {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
-                </div>
-            {% endif %}
-        {% else %}
-            {# Show some example queries to run, maybe query syntax, something else? #}
+        {% if page.has_previous or page.has_next %}
+            <div>
+                {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
+                |
+                {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
+            </div>
         {% endif %}
-    </form>
+    {% else %}
+        {# Show some example queries to run, maybe query syntax, something else? #}
+        
+        
+    {% endif %}
+        
+
     
 {% endblock %}
