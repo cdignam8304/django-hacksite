@@ -54,3 +54,6 @@ class Hack(models.Model):
     
     def __str__(self):
         return self.hack_title
+    
+    def get_absolute_url(self):
+        return f"/{self.hack_slug}/"

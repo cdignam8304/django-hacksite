@@ -1,20 +1,26 @@
 {% extends "main/header.html" %}
 
 {% block content %}
-    
 
     {% if query %}
         <h3 style="color: silver;">Search Results</h3>
+        Results for <strong>{{ query }}</strong>:
 
         {% for result in page.object_list %}
             <p>
-                <a href="{{ result.object.get_absolute_url }}">{{ result.object.hack_title }}</a>
+                <h5>Result object: {{ result }}</h5>
             </p>
             <p>
-                <a href="{{ result.object.get_absolute_url }}">{{ result.object.hack_series }}</a>
+                <a href="{{ result.object.get_absolute_url }}">Hack title: {{ result.object.hack_title }}</a>
             </p>
             <p>
-                <a href="{{ result.object.get_absolute_url }}">{{ result.object.hack_category }}</a>
+                <a href="{{ result.object.get_absolute_url }}">Hack slug: {{ result.object.hack_slug }}</a>
+            </p>
+            <p>
+                <a href="{{ result.object.get_absolute_url }}">Hack series: {{ result.object.hack_series }}</a>
+            </p>
+            <p>
+                <a href="{{ result.object.get_absolute_url }}">Hack category: {{ result.object.hack_category }}</a>
             </p>
         {% empty %}
             <div>
