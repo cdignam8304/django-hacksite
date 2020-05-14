@@ -1,2 +1,3 @@
 {{ object.hack_title }}
 {{ object.hack_content }}
+{{ object.hack_series }}
