@@ -3,10 +3,37 @@
 
 {% block content %}
 
-    <p>{{ user.username }}</p>
-    <p>{{ user.email }}</p>
-    <p>{{ user.first_name }}</p> 
-    <p>{{ user.last_name }}</p>
+    <h4 style="color: silver;">User Account Details</h4>
+    <br>
+
+    <table class="centered">
+        <thead>
+          <tr>
+              <th>Field</th>
+              <th>Value</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>username</td>
+            <td>{{ user.username }}</td>
+          </tr>
+          <tr>
+            <td>first name</td>
+            <td>{{ user.first_name }}</td>
+          </tr>
+          <tr>
+            <td>last name</td>
+            <td>{{ user.last_name }}</td>
+          </tr>
+          <tr>
+            <td>email</td>
+            <td>{{ user.email }}</td>
+          </tr>
+        </tbody>
+      </table>
+
     
 {% endblock %}
 
