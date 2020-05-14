@@ -110,7 +110,11 @@ def login_request(request):
             
 
 def get_user_profile(request, username):
-    user = User.objects.get(username=username)
-    return render(request, "main/user_profile.html", {"user":user})
+    if request.user.is_authenticated:
+        user = User.objects.get(username=username)
+        return render(request, "main/user_profile.html", {"user":user})
+    else:
+        messages.error(request, "You must be logged in to view the account page!")
+        return redirect("main:homepage")
     
     

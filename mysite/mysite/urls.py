@@ -19,7 +19,6 @@ from django.conf.urls import url
 
 urlpatterns = [
     url(r'^search/', include('haystack.urls')),
-    url(r'^user/', include('main.urls')),
     path("admin/", admin.site.urls),
     path("", include("main.urls")),
     path("tinymce/", include("tinymce.urls")),

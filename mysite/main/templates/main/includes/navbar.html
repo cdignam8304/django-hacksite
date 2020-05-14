@@ -14,7 +14,7 @@
             </li>      
             <li><a href="/"><i class="material-icons" style="padding-left: 0px;">home</i></a></li>
             {% if user.is_authenticated %}
-                <li><a href="/{{user.username}}" title="{{user.username}}"><i class="material-icons" style="padding-left: 0px;">account_circle</i></a></li>
+                <li><a href="/profile/{{user.username}}" title="{{user.username}}"><i class="material-icons" style="padding-left: 0px;">account_circle</i></a></li>
                 <li><a href="/logout">Logout</a></li>
             {% else %}
                 <li><a href="/register">Register</a></li>
