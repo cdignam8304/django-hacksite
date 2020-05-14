@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from .models import Hack, HackCategory, HackSeries
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.models import User
 from django.contrib import messages
 from .forms import NewUserForm
 
@@ -107,9 +108,9 @@ def login_request(request):
                   template_name="main/login.html",
                   context={"form": form})
             
-    
-    
-    
-    
+
+def get_user_profile(request, username):
+    user = User.objects.get(username=username)
+    return render(request, "main/user_profile.html", {"user":user})
     
     
