@@ -26,7 +26,7 @@ app_name = "main"
 
 urlpatterns = [
     path("", views.homepage, name="homepage"),
-    
+    # path("search/", views.autocomplete_search, name="search"),
     path("admin/", admin.site.urls), # added admin here due to order urls are checked
     path("register/", views.register, name="register"),
     path("logout/", views.logout_request, name="logout"), # we use logout_request as their is a django method called logout that we already imported!

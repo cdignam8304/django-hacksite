@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from .forms import NewUserForm
 
+
 # Create your views here.
 
 def single_slug(request, single_slug):
@@ -116,5 +117,12 @@ def get_user_profile(request, username):
     else:
         messages.error(request, "You must be logged in to view the account page!")
         return redirect("main:homepage")
+    
+
+    
+    
+    
+    
+    
     
     
