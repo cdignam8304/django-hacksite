@@ -8,8 +8,8 @@ from .models import Hack, HackSeries, HackCategory
 class HackIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True)
     title = indexes.CharField(model_attr='hack_title')
-    content = indexes.CharField(model_attr='hack_content')
-    # content_auto = indexes.EdgeNgramField(model_attr="hack_content") # replaces regular CharField index on line above
+    # content = indexes.CharField(model_attr='hack_content')
+    content_auto = indexes.EdgeNgramField(model_attr="hack_content") # replaces regular CharField index on line above
     # pub_date = indexes.DateTimeField(model_attr='pub_date')
 
     def get_model(self):

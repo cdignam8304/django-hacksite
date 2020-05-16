@@ -6,6 +6,9 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
 from django.contrib import messages
 from .forms import NewUserForm
+from haystack.query import SearchQuerySet
+from haystack.views import search_view_factory, SearchView
+from haystack.forms import SearchForm
 
 
 # Create your views here.
@@ -119,6 +122,16 @@ def get_user_profile(request, username):
         return redirect("main:homepage")
     
 
+def search(request):
+    sqs = SearchQuerySet().all() # this works with regular content index
+    # sqs = SearchQuerySet().filter(content_auto=request.GET.get('q', '')) # try this with autocomplete index
+    view = search_view_factory(
+        view_class=SearchView,
+        template='search/search.html',
+        searchqueryset=sqs,
+        form_class=SearchForm
+        )
+    return view(request)
     
     
     

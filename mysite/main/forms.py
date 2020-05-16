@@ -1,9 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from haystack.forms import SearchForm
-from haystack.query import SearchQuerySet
-
+from haystack.forms import ModelSearchForm
 
 class NewUserForm(UserCreationForm):
     email = forms.EmailField(required=True)
@@ -21,22 +19,19 @@ class NewUserForm(UserCreationForm):
             user.save()
         return user
     
-
-class AutoCompleteSearchForm(SearchForm):
     
-    def search(self):
-        if not self.is_valid():
-            return self.no_query_found()
-        # if not self.cleaned_data.get("q"):
-        if not self.cleaned_data["q"]:
-            return self.no_query_found()
-        # sqs = super(AutoCompleteSearchForm, self).search()
-        # sqs = self.searchqueryset.filter(first_name_auto=self.cleaned_data["q"])
-        sqs = SearchQuerySet().autocomplete(content_auto=self.cleaned_data["q"])
+# THERE IS A PROBLEM WITH THE CODE BELOW - SEE SYNTAX ERROR
+# class AutocompleteModelSearchForm(ModelSearchForm):
 
-        # if self.load_all
-        #     sqs = sqs.load_all()
+#     def search(self):
+#         if not self.is_valid():
+#             return self.no_query_found()
+#         if not self.cleaned_data.get("q")
+#             return self.no_query_found()
+#         sqs = self.searchqueryset.filter(first_name_auto=self.cleaned_data["q"])
 
-        return sqs
-    
+#         if self.load_all
+#             sqs = sqs.load_all()
+
+#         return sqs
 
