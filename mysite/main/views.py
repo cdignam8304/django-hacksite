@@ -123,14 +123,16 @@ def get_user_profile(request, username):
     
 
 def search(request):
-    sqs = SearchQuerySet().all() # this works with regular content index
-    # sqs = SearchQuerySet().filter(content_auto=request.GET.get('q', '')) # try this with autocomplete index
+    # sqs = SearchQuerySet().all() # this works same as default haystack functionality
+    sqs = SearchQuerySet().autocomplete(content_auto=request.GET.get('q', '')) # works but not partial words, but only returns Hacks...no Series or Categories!
+    # sqs = SearchQuerySet().autocomplete(content_auto__contains=request.GET.get('q', '')) # does not work: no results found
     view = search_view_factory(
         view_class=SearchView,
         template='search/search.html',
         searchqueryset=sqs,
         form_class=SearchForm
         )
+
     return view(request)
     
     
