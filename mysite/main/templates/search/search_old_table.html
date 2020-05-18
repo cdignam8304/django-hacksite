@@ -11,22 +11,32 @@
 
     {% if query %}
         <h4 style="color: silver; text-align: center;">Results for: <strong>{{ query }}</strong></h4>
+        
         <br>
         
-        <!-- Collapsible - START -->
-        <ul class="collapsible">
-            {% for result in page.object_list %}
-                <li>
-                <div class="collapsible-header"><i class="material-icons">expand_more</i><a href="{{ result.object.get_absolute_url }}">{{ result.object.hack_title }}</a></div>
-                <div class="collapsible-body"><span>{{ result.object.hack_content | safe }}</span></div>
-            </li>
-            {% empty %}
-                <li>
-                    <div class="collapsible-header"><i class="material-icons">filter_drama</i><div>NO RESULTS!</div></div>
-                </li>
-            {% endfor %}
-        </ul>
-        <!-- Collapsible - END -->
+        <table class="highlight">
+            <thead>
+                <tr>
+                    <th>Hack Name</th>
+                    <th>Series</th>
+                </tr>
+            </thead>
+            
+            
+            <tbody>
+                {% for result in page.object_list %}
+                    <tr>
+                        <td><a href="{{ result.object.get_absolute_url }}">{{ result.object.hack_title }}</a></td>
+                        <td>{{ result.object.hack_series }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td>NO RESULTS!</td>
+                        <td></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
         
         <br>
         {% if page.has_previous or page.has_next %}

@@ -1,0 +1,98 @@
+{% extends "main/header.html" %}
+
+{% block content %}
+
+    <!-- Experiment to pass extra_context -->
+    {% for i in extra %}
+        <p>{{ i }}</p>
+    {% endfor %}
+
+    {% if query %}
+        <h4 style="color: silver;">Search results for: <strong>{{ query }}</strong></h4>
+        
+        <br>
+        <h5><strong>Specific Hacks Matched:</strong></h5>
+        
+        
+        
+        <table class="highlight">
+            <thead>
+                <tr>
+                    <th>Hack Name</th>
+                    <th>Series</th>
+                </tr>
+            </thead>
+        
+            <tbody>
+                <tr>
+                    <td>insert hack name</td>
+                    <td>insert series</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        
+        
+        {% for result in page.object_list %} 
+            {% if result.model_name == "hack" %} 
+                <p>
+                    <a href="{{ result.object.get_absolute_url }}"><strong>{{ result.object.hack_title }}</strong></a>
+                    <br>
+                    <i>(Series:</i> {{ result.object.hack_series }})
+                </p>
+            {% endif %}
+        {% empty %}
+            <div>
+                No Hacks found for: <span style="font-weight: bold; font-size: 18px; color: gray;">{{query}}</span>
+            </div>
+        {% endfor %}
+            
+        <br>
+        <h5><strong>Series</strong></h5>
+        {% for result in page.object_list %}
+            {% if result.model_name == "hackseries" %}
+                <p>
+                    <div style="color: navy;"><strong>{{ result.object.hack_series }}</strong></div>
+                    <i>(Category:</i> {{ result.object.hack_category }})
+                </p>
+            {% endif %}
+         {% empty %}
+            <div>
+                No Series found for: <span style="font-weight: bold; font-size: 18px; color: gray;">{{query}}</span>
+            </div>
+        {% endfor %}
+        
+        <br>
+        <h5><strong>Categories</strong></h5>
+        {% for result in page.object_list %}
+            {% if result.model_name == "hackcategory" %}
+                <p>
+                    <div style="color: navy;"><strong>{{ result.object.hack_category }}</strong></div>
+                    <i>(Summary:</i> {{ result.object.category_summary }})
+                </p>
+            {% endif %}
+         {% empty %}
+            <div>
+                No Categories found for: <span style="font-weight: bold; font-size: 18px; color: gray;">{{query}}</span>
+            </div>
+        {% endfor %}
+            
+        <br>
+
+        {% if page.has_previous or page.has_next %}
+            <div>
+                {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
+                |
+                {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
+            </div>
+        {% endif %}
+        
+    {% else %}
+        {# Show some example queries to run, maybe query syntax, something else? #}
+        
+        
+    {% endif %}
+        
+
+    
+{% endblock %}
