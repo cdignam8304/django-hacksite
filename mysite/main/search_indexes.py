@@ -7,7 +7,8 @@ from .models import Hack, HackSeries, HackCategory
 
 class HackIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True)
-    title = indexes.CharField(model_attr='hack_title')
+    # title = indexes.CharField(model_attr='hack_title')
+    title_auto = indexes.NgramField(model_attr='hack_title') # check to see if this causes titles to be indexed
     # content = indexes.CharField(model_attr='hack_content')
     # content_auto = indexes.EdgeNgramField(model_attr="hack_content") # replaces regular CharField index on line above
     content_auto = indexes.NgramField(model_attr="hack_content") # try this

@@ -23,11 +23,16 @@ class NewUserForm(UserCreationForm):
 class AutocompleteSearchForm(SearchForm):
 
     def search(self):
+        query = self.cleaned_data["q"]
+        
         if not self.is_valid():
             return self.no_query_found()
-        if not self.cleaned_data["q"]:
-            return self.no_query_found()
-        sqs = self.searchqueryset.filter(content_auto=self.cleaned_data["q"])
+        if not query:
+            return self.no_query_found() 
+        
+        # sqs = self.searchqueryset.filter(content_auto=self.cleaned_data["q"]) # works for hack content but no results from other fields
+        # sqs = self.searchqueryset.filter(title_auto=self.cleaned_data["q"]) # works for hack title but no results from other fields
+        sqs = self.searchqueryset.filter(content=query) # Gets results from all indexed fields in all models BUT no partial text search. Full words, which behaves more like EdgeNgramField(?) NB: "content" is a special field in haystack to reference all fields/models in index.
 
         if self.load_all:
             sqs = sqs.load_all()

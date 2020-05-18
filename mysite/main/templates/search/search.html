@@ -2,6 +2,11 @@
 
 {% block content %}
 
+    <!-- Experiment to pass extra_context -->
+    {% for i in extra %}
+        <p>{{ i }}</p>
+    {% endfor %}
+
     {% if query %}
         <h4 style="color: silver;">Search results for: <strong>{{ query }}</strong></h4>
         

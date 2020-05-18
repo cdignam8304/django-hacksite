@@ -119,13 +119,22 @@ def get_user_profile(request, username):
     else:
         messages.error(request, "You must be logged in to view the account page!")
         return redirect("main:homepage")
-    
+
+
+# Experiment to try to pass extra_context: IT WORKS!
+class MySearchView(SearchView):
+    def extra_context(self):
+        return {"extra": [1,2,3,4]}
+
+
 # Custom search function using custom search form
 def search(request):
     view = search_view_factory(
-        view_class=SearchView,
+        # view_class=SearchView, # experiment to try to pass extra_context
+        view_class=MySearchView, # experiment to try to pass extra_context: IT WORKS!
         template='search/search.html',
-        form_class=AutocompleteSearchForm)
+        form_class=AutocompleteSearchForm,
+        )
     return view(request)
     
     
