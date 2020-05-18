@@ -17,9 +17,9 @@
         <ul class="collapsible">
             {% for result in page.object_list %}
                 <li>
-                <div class="collapsible-header"><i class="material-icons">expand_more</i><a href="{{ result.object.get_absolute_url }}">{{ result.object.hack_title }}</a></div>
-                <div class="collapsible-body"><span>{{ result.object.hack_content | safe }}</span></div>
-            </li>
+                    <div class="collapsible-header"><i class="material-icons">expand_more</i><a href="{{ result.object.get_absolute_url }}">{{ result.object.hack_title }}</a></div>
+                    <div class="collapsible-body"><span>{{ result.object.hack_content | safe }}</span></div>
+                </li>
             {% empty %}
                 <li>
                     <div class="collapsible-header"><i class="material-icons">mood_bad</i><div>NO RESULTS!</div></div>
