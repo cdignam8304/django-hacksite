@@ -6,9 +6,8 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
 from django.contrib import messages
 from .forms import NewUserForm
-from haystack.query import SearchQuerySet
 from haystack.views import search_view_factory, SearchView
-from haystack.forms import SearchForm
+from .forms import AutocompleteSearchForm
 
 
 # Create your views here.
@@ -121,18 +120,12 @@ def get_user_profile(request, username):
         messages.error(request, "You must be logged in to view the account page!")
         return redirect("main:homepage")
     
-
+# Custom search function using custom search form
 def search(request):
-    # sqs = SearchQuerySet().all() # this works same as default haystack functionality
-    sqs = SearchQuerySet().autocomplete(content_auto=request.GET.get('q', '')) # works but not partial words, but only returns Hacks...no Series or Categories!
-    # sqs = SearchQuerySet().autocomplete(content_auto__contains=request.GET.get('q', '')) # does not work: no results found
     view = search_view_factory(
         view_class=SearchView,
         template='search/search.html',
-        searchqueryset=sqs,
-        form_class=SearchForm
-        )
-
+        form_class=AutocompleteSearchForm)
     return view(request)
     
     

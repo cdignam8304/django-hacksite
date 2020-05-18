@@ -24,7 +24,8 @@ class HackIndex(indexes.SearchIndex, indexes.Indexable):
 class HackSeriesIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True)
     hack_series = indexes.CharField(model_attr='hack_series')
-    series_summary = indexes.CharField(model_attr='series_summary')
+    # series_summary = indexes.CharField(model_attr='series_summary')
+    sersumm_auto = indexes.NgramField(model_attr="series_summary") # try this
     # pub_date = indexes.DateTimeField(model_attr='pub_date')
 
     def get_model(self):
@@ -38,7 +39,8 @@ class HackSeriesIndex(indexes.SearchIndex, indexes.Indexable):
 class HackCategoryIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True)
     hack_category = indexes.CharField(model_attr='hack_category')
-    category_summary = indexes.CharField(model_attr='category_summary')
+    # category_summary = indexes.CharField(model_attr='category_summary')
+    categsumm_auto = indexes.NgramField(model_attr="category_summary") # try this
     # pub_date = indexes.DateTimeField(model_attr='pub_date')
 
     def get_model(self):
