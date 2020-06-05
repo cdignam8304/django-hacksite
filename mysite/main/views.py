@@ -8,6 +8,7 @@ from django.contrib import messages
 from .forms import NewUserForm
 from haystack.views import search_view_factory, SearchView
 from .forms import AutocompleteSearchForm
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -47,7 +48,6 @@ def single_slug(request, single_slug):
                                "sidebar":hacks_from_series,
                                "this_hack_idx":this_hack_idx})
         
-    
     return HttpResponse(f"{single_slug} is not a HackCategory or a Hack!!!")
 
 
@@ -82,10 +82,12 @@ def register(request): # NB: The default request is a GET request
                   template_name="main/register.html",
                   context={"form": form})
 
+
 def logout_request(request):
     logout(request)
     messages.info(request, "Logged out successfully!")
     return redirect("main:homepage")
+
 
 def login_request(request):
     
@@ -110,8 +112,9 @@ def login_request(request):
     return render(request=request,
                   template_name="main/login.html",
                   context={"form": form})
-            
 
+
+@login_required(login_url="/login/")
 def get_user_profile(request, username):
     if request.user.is_authenticated:
         user = User.objects.get(username=username)
