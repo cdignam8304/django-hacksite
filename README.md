@@ -8,3 +8,4 @@ A website of hacks
 - django-haystack
 - Whoosh
 - TinyMCE Light
+- SQLite3
